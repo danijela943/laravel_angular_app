@@ -1,0 +1,75 @@
+<div ng-controller="EmbedController">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                   CREATE FORM
+            </div>
+            <div class="panel-body">
+                <form name="formCreate">
+                    <div class="col-lg-12">
+                        <div class="col-lg-6">
+                            <label>Title:</label>
+                            <input type="text" ng-model="formCreate.title" class="form-control" required/>
+                            <span class="error" ng-show="formCreate.title.$invalid && formCreate.title.$dirty">
+                                <span ng-show="formCreate.title.$error.required">Field 'Title' is required</span>
+                            </span>
+                            <input type="hidden" name="hdnIdOffer" ng-model="hdnIdOffer"/>
+                            <button type="submit" class="btn btn-primary pull-right margin-top" ng-click="createFormular(formCreate)" ng-disabled="formCreate.title.$invalid && formCreate.title.$dirty" ng-hide="savedForm">Create</button>
+                        </div>
+                    </div>
+                </form>
+                <hr class="line-bottom"/>
+                <div class="row" ng-show="showForm">
+                    <div class="col-lg-12" ng-repeat="element in elements track by $index" ng-show="showFormElements==true">
+                        <!-- form add field -->
+                        <form name="outerForm" >
+                            <div class="col-lg-3">
+                                <input type="hidden" ng-model="hdnId" value="" />
+                                <input class="form-control" type="text" ng-model="outerForm.label[$index]" placeholder="{{element.placeholderLabel}}" required="" />
+                                <span class="error" ng-show="outerForm['label' + $index].$dirty && outerForm['label' + $index].$invalid">
+                                    <span ng-show="outerForm['label'+$index].$error.required"> Field 'Label' is required. </span>
+                                </span>
+                            </div>
+                            <div class="col-lg-3">
+                                <!-- ddl types -->
+                                <select ng-options="type.type_name for type in types track by type.id_type" ng-model="outerForm.type[$index]" class="form-control" ng-change="onchangeType(this, $index)" required=""> 
+                                    <option value=""> -- Choose type -- </option>
+                                </select>
+                                <!--/ ddl types -->
+                                <span class="error" ng-show="outerForm['type' + $index].$dirty && outerForm['type' + $index].$invalid">
+                                    <span ng-show="outerForm['type'+$index].$error.required"> You must choose type. </span>
+                                </span>
+                            </div>
+                            <div class="col-lg-3 position-top">
+                                <input type="checkbox" value="required" ng-model="outerForm.required[$index]" value="yes" /> <label>Required ? </label>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="col-lg-12" ng-repeat="allowV in element.allowedValues track by $index">
+                                    <!-- inner form add allowed value -->
+                                    <!--<ng-form name="innerForm">-->
+                                         <input type="text" name="tbAllowedVal{{$index}}" ng-model="outerForm.allowed[$index]" placeholder="{{allowV.placeholderLabel}}" class="form-control" required />
+                                        <span class="error" ng-show="outerForm['tbAllowedVal' + $index].$dirty && outerForm['tbAllowedVal' + $index].$invalid">
+                                            <span ng-show="outerForm['tbAllowedVal' + $index].$error.required"> Field 'Price' is required. </span>
+                                        </span>
+                                    <!--/ inner form add allowed value -->
+                                    <!--</ng-form>-->
+                                </div>
+                                <button class="btn btn-primary pull-right" ng-click="removeAllowedValue(element.allowedValues, $index, this)" ng-show="element.allowedValues.length>0" >Remove</button>
+                                <button ng-click="addAllowedValue(element.allowedValues)" class="btn btn-primary pull-right" ng-show="element.allowedValues.length>0">Add</button>
+                                
+                                <div class="clearfix"></div>
+                            </div>
+                            <!-- buttons - form add field-->
+                            <div class="col-lg-12 position-top">
+                                <button type="submit" ng-click="addForm($index, outerForm)" class="btn btn-primary pull-right" ng-hide="element.saved" ng-disabled="outerForm['label' + $index].$dirty && outerForm['label' + $index].$invalid || outerForm['type' + $index].$dirty && outerForm['type' + $index].$invalid || outerForm.$invalid">Save field</button>
+                            <!--/ buttons - form add field-->
+                            </div>
+                            
+                            <div class="clearfix"></div>
+                            <hr class="line-bottom" ng-show="elements.length>1"/>
+                        <!--/ form add field -->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>

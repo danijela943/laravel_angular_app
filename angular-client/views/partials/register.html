@@ -1,0 +1,66 @@
+
+        <div class="offers" ng-controller="EmbedController">
+            <div other-directive></div>
+            <div class="alert alert-success" ng-repeat="message in root.success track by $index">{{message}}</div>
+            <div class="alert alert-danger" ng-repeat="message in root.errors track by $index">{{message}}</div>
+            <div class="content">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Register</div>
+
+                    <div class="panel-body">
+                        <form class="form-horizontal" name="formRegister">
+                            
+
+                            <div class="form-group">
+                                <label for="name" class="col-md-4 control-label">Name</label>
+
+                                <div class="col-md-6">
+                                    <input  type="text" class="form-control" required autofocus ng-model="formRegister.name"/>
+                                    <span class="error" ng-show="formRegister.name.$dirty && formRegister.name.$invalid">
+                                    <span ng-show="formRegister.name.$error.required"> Field 'Name' is required. </span>
+                                </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+
+                                <div class="col-md-6">
+                                    <input type="email" class="form-control" required ng-model="formRegister.email">
+                                    <span class="error" ng-show="formRegister.email.$dirty && formRegister.email.$invalid">
+                                     <span ng-show="formRegister.email.$error.required"> Field 'Name' is required. </span>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password" class="col-md-4 control-label">Password</label>
+
+                                <div class="col-md-6">
+                                    <input  type="password" class="form-control"  required ng-model="formRegister.password"/>
+                                     <span class="error" ng-show="formRegister.password.$dirty && formRegister.password.$invalid">
+                                     <span ng-show="formRegister.password.$error.required"> Field 'Name' is required. </span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
+                                <div class="col-md-6">
+                                    <input id="password-confirm" type="password" class="form-control" ng-model="formRegister.confirm" required ng-match="formRegister.password"/>
+                                    <span class="error" ng-show="formRegister.confirm.$dirty && formRegister.confirm.$invalid">
+                                    <span ng-show="formRegister.confirm.$error.match"> Passwords didnt match. </span>
+                                </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-6 col-md-offset-4">
+                                    <button type="submit" class="btn btn-primary" ng-click="registerUser(formRegister)" ng-disabled="formRegister.name.$dirty && formRegister.name.$invalid || formRegister.email.$dirty && formRegister.email.$invalid || formRegister.password.$dirty && formRegister.password.$invalid">
+                                        Register
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>

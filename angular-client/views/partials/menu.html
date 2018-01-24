@@ -1,0 +1,4 @@
+<ul id="menu">
+	<li><a ng-click="showLogin()">UP</a></li>
+	<li ng-repeat="menu in menus | orderBy: 'position'" ng-if="(isAuth==true && (menu.title=='Login' || menu.title=='Register') || isAuth==false && menu.title=='Logout')? false : true"><i class="{{menu.icon}}"></i><a ng-click="this[menu.path]()">{{menu.title}}</a></li>
+</ul>

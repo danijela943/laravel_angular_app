@@ -1,0 +1,40 @@
+<div class="panel-body" ng-controller="EmbedController" id="login">
+    <div class="alert alert-success" ng-repeat="message in root.success track by $index">{{message}}</div>
+    <div class="alert alert-danger" ng-repeat="message in root.errors track by $index">{{message}}</div> 
+    <div class="alert alert-danger" ng-repeat="error in errors track by $index">
+        {{ error }}
+    </div>
+    <div class="alert alert-success" ng-repeat="succ in success track by $index">
+        {{ succ }}
+    </div>
+        <h1>United professions</h1>
+        <form role="form" name="loginform" novalidate=""> 
+            <hr /> 
+            <h2>Enter your details to login</h2> 
+               <br /> 
+            <div class="row">
+                <div class="col-lg-2"></div>
+                <div class="form-group input-group col-lg-8"> 
+                    <span class="input-group-addon"><i class="fa fa-user-o"  ></i></span> 
+                    <input type="text" class="form-control" placeholder="email" name="email" id="email" data-ng-model="email"/> 
+                </div> 
+                <div class="col-lg-2"></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2"></div>
+                <div class="form-group input-group col-lg-8"> 
+                    <span class="input-group-addon"><i class="fa fa-lock"  ></i></span> 
+                    <input type="password" class="form-control"  placeholder="Your Password" name="password" data-ng-model="password"/> 
+                </div> 
+                <div class="col-lg-2"></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3"></div>
+                <div class="form-group col-lg-8">
+                    <input type="submit" class="btn btn-primary " value="Login Now" ng-click="login()"/>
+                    <a href="#" ng-click="showRegisterPage();">Not register ? </a>
+                </div>
+                <div class="col-lg-2"></div>
+            </div>
+        </form>
+    </div>

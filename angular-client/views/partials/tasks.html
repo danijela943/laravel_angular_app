@@ -1,0 +1,30 @@
+<div class="offers" ng-controller="EmbedController" >
+	<div other-directive></div>
+    <div class="alert alert-success" ng-repeat="message in root.success track by $index">{{message}}</div>
+    <div class="alert alert-danger" ng-repeat="message in root.errors track by $index">{{message}}</div>
+    <div class="content">
+    	<h3>Your tasks</h3>
+		<div ng-repeat="task in tasks | orderBy: '-created_at' track by $index" class="task"> 
+			<div class="{{task.status.class}}">
+				<select ng-options="s.name for s in status track by s.id_status" ng-model="ddlStatus[$index]" ng-change="updateStatus(task.id_task, this, $index)"><option value=""> -- Change status-- </option></select>
+				<h3>{{task.title_task}}</h3>
+				<div ng-repeat="el in task.body_task track by $index">
+					<div ng-repeat="element in formElements track by $index" ng-if="el.id_form_element==element.id_form_element">
+						<label>{{element.label}}</label> 
+						<span ng-if="element.allowed.length <= 1">{{(el.value.value)? el.value.value : el.value}}</span> 
+						<ul ng-repeat="(key,value) in el.value track by $index" ng-if="element.allowed.length > 1">
+							<li>{{element.allowed[key].value}}</li>
+						</ul>
+						
+					</div>
+					
+				</div>
+				<p><b>Created: </b> {{task.email}}</p>
+				<form name="taskForm">
+				<textarea ng-model="taskForm.comment" placeholder="Type comment.."></textarea>
+				<input type="submit" name="submitForm" ng-click="saveTaskComment(task.id_task, taskForm)" value="Save comment"/>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

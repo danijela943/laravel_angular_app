@@ -1,0 +1,44 @@
+<div ng-controller="EmbedController" class="offers">
+	<div other-directive></div>
+	<div class="alert alert-success" ng-repeat="message in root.success track by $index">{{message}}</div>
+    <div class="alert alert-danger" ng-repeat="message in root.errors track by $index">{{message}}</div>
+	<div class="content form_offer">
+		<button ng-click="showCreateFormPage(id_offer)" class="btn btn-default"><i class="fa fa-arrow-left"></i> Go back</button>
+		<div ng-if="!change">
+			<h2>{{element.title}}</h2>
+			<div class="form-group" ng-repeat="fel in formElements track by $index" data-id="{{fel.id_form}}" ng-if="fel.id_form==element.id_form">
+				<label>{{fel.label}} <span class="error">*</span></label>
+				<input type="{{fel.type_name}}" ng-if="fel.type_name=='text' || fel.type_name=='number'" ng-model="task.fieldText[fel.id_form_element]" ng-disabled="true"/>
+				<textarea ng-if="fel.type_name=='textbox'" cols="10" rows="10" ng-model="task.fieldTextBox[fel.id_form_element]" ng-disabled="true"></textarea>
+				<select ng-if="fel.type_name=='dropdown list'" ng-options="allowed.value for allowed in fel.allowed track by allowed.id_value" ng-model="task.fieldSelect[fel.id_form_element]">
+					<option value=""> -- Choose -- </option>
+				</select>
+				<div ng-repeat="el in fel.allowed track by $index"  ng-if="fel.type_name=='radio'" >
+					<input type="radio"  ng-model="task.fieldRadio[fel.id_form_element][$index]" value="{{el.id_value}}"/> {{el.value}} 
+				</div>
+				<div ng-repeat="el in fel.allowed track by $index" ng-if="fel.type_name=='checkbox'">
+					<input type="checkbox"   value="{{el.id_value}}" ng-model="task.fieldCheck[fel.id_form_element][$index]"/> {{el.value}} 
+				</div>
+			</div>
+		</div>
+		<div ng-if="change">
+			<form name="formUpdate">
+				<div class="form-group">
+					<label>Title:</label><br/>
+                    <input type="text" ng-model="formUpdate.title" class="form-control" required ng-value="form.title"/>
+                    <span class="error" ng-show="formUpdate.title.$invalid && formUpdate.title.$dirty">
+                        <span ng-show="formUpdate.title.$error.required">Field 'Title' is required</span>
+                    </span>
+                    <input type="hidden" name="hdnIdForm" ng-model="hdnIdForm"/>
+
+				</div>
+				<div class="form-group">
+					<label>Active? </label>
+					<input type="checkbox" name="active" ng-model="formUpdate.active" ng-checked="(form.active==1)? 1 : 0"/>
+				</div>
+				<button type="submit" class="btn btn-primary pull-right margin-top" ng-click="saveEditForm(formUpdate)" ng-disabled="formUpdate.title.$invalid && formUpdate.title.$dirty">Create</button>
+			</form>
+		</div>
+	</div>
+	</form>
+</div>

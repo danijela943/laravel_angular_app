@@ -1,0 +1,72 @@
+<div class="offers" ng-controller="EmbedController">
+    <div other-directive></div>
+    <div class="alert alert-success" ng-repeat="message in root.success track by $index">{{message}}</div>
+    <div class="alert alert-danger" ng-repeat="message in root.errors track by $index">{{message}}</div> 
+    <div class="content">
+       <div class="panel panel-info">
+            <div class="panel-heading">
+                   CREATE OFFER
+            </div>
+            <div class="panel-body">
+                <form role="form" name="formOffer">
+                    <div class="form-group">
+                        <label>Title: <span class="required" ng-show="formOffer.tbTitle.$error.required">*</span></label>
+                        <input class="form-control" type="text" id="tbTitle" name="tbTitle" ng-model="offer.title" required ng-value="(change)? offer.title : ''"/> 
+                        <span class="error" ng-show="formOffer.tbTitle.$dirty && formOffer.tbTitle.$invalid">
+                                <span ng-show="formOffer.tbTitle.$error.required">Field 'Title' is required.</span>
+                        </span>
+
+                    </div>
+                     <div class="form-group" ng-if="change">
+                        <label>Active? </label>
+                        <br/>
+                        <input type="checkbox" ng-model="offer.actived" name="active" ng-Checked="offer.active==1"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Body: <span class="required" ng-show="formOffer.tbBody.$error.required">*</span></label>
+                        <textarea class="form-control" rows="10" id="tbBody" name="tbBody" ng-model="offer.body" required="" ng-value="(change)? offer.body : ''"></textarea>
+                        <span class="error" ng-show="formOffer.tbBody.$dirty && formOffer.tbBody.$invalid">
+                                <span ng-show="formOffer.tbBody.$error.required">Field 'Body' is required.</span>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label>Category: <span class="required">*</span></label>
+                        <select name="ddlCategory" id="ddlCategory" ng-model="offer.category" data-ng-options="o.category_name for o in categories track by o.id_category" required="">
+                        <option value=""> -- Choose category -- </option>
+                        </select>
+                        <span class="error" ng-show="formOffer.ddlCategory.$dirty && formOffer.ddlCategory.$invalid">
+                                <span class="error" ng-show="formOffer.ddlCategory.$error.required"> You must choose currency. </span>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label>Price: <span class="required" ng-show="formOffer.tbPrice.$error.regexCheck" >*</span></label>
+                       <input class="form-control" type="text" id="tbPrice" name="tbPrice" ng-model="offer.price" custom-check required check="price" ng-value="(change)? offer.price : ''"/>
+                       <span class="error" ng-show="formOffer.tbPrice.$dirty && formOffer.tbPrice.$invalid">
+                                <span ng-show="formOffer.tbPrice.$error.required"> Field 'Price' is required. </span>
+                                <span ng-show="formOffer.tbPrice.$error.regexCheck"> Field 'Price' can contain only and max 30 numbers. (etc. 100, 450.50 or 19002,75 ) </span>
+                        </span> 
+                    </div>
+                    <div class="form-group">
+                        <label>Currency: <span class="required">*</span></label>
+                        <select name="ddlCurrency" id="ddlCurrency" ng-model="offer.currency" data-ng-options="o.name for o in currency track by o.id_currency" required="">
+                        <option value=""> -- Choose currency -- </option>
+                        </select>
+                        <span class="error" ng-show="formOffer.ddlCurrency.$dirty && formOffer.ddlCurrency.$invalid">
+                                <span class="error" ng-show="formOffer.ddlCurrency.$error.required"> You must choose currency. </span>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label>Background color:</label>
+                       <input class="form-control" type="color" id="tbColor" name="tbColor" ng-model="offer.bgColor" ng-value="(change) ? offer.bgcolor : ''"/> 
+                    </div>
+                    <div class="form-group">
+                        <label>Text color:</label>
+                       <input class="form-control" type="color" id="tbTxtColor" name="tbTxtColor" ng-model="offer.textColor" ng-value="(change) ? offer.txtcolor : ''"/> 
+                    </div>
+                    <button type="submit" class="btn btn-info" ng-disabled="formOffer.tbTitle.$dirty && formOffer.tbTitle.$invalid || formOffer.tbBody.$dirty && formOffer.tbBody.$invalid || formOffer.tbPrice.$dirty && formOffer.tbPrice.$invalid || formOffer.ddlCurrency.$dirty && formOffer.ddlCurrency.$invalid" ng-click="(!change)? addOffer(offer) : changeOffer(offer)" ><span ng-if="!change">Add Offer</span><span ng-if="change">Change Offer</span> </button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

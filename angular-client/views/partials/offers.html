@@ -1,0 +1,48 @@
+<div class="offers" ng-controller="EmbedController" ng-init="showForm=false">
+	<div other-directive></div>
+	<div class="content">
+		<h3 ng-if="userOffer">Your offers</h3>
+		<div class="alert alert-success" ng-repeat="message in root.success track by $index">{{message}}</div>
+	    <div class="alert alert-danger" ng-repeat="message in root.errors track by $index">{{message}}</div> 
+	    <button ng-click="(showForm==true)? showForm=false : showForm=true" class="btn btn-default" >Price filter</button>
+	     <select ng-options="category.category_name for category in categories track by category.id_category" ng-model="slCategory"> 
+	    	<option value=""> -- Choose category -- </option>
+	    </select>
+	    <div class="form" ng-show="showForm">
+	    	<div class="form-group">
+	    		<label>Min: </label>
+	    		<input type="number" ng-model="lessThan" class="form-control"/>
+	    	</div>
+	    	<div class="form-group">
+		    	<label>Max:</label>
+		    	<input type="number" ng-model="greaterThan" class="form-control"/>
+	    	</div>
+	    </div>
+	    <div class="footer">
+			<p>Number of offers: {{(offers| filter: priceBetween('price', lessThan, greaterThan, slCategory.id_category)).length}}</p>
+		</div>
+	    <p>&nbsp;</p>
+		<div class="offer left" ng-repeat="offer in offers | filter: priceBetween('price', lessThan, greaterThan, slCategory.id_category) track by $index ">
+			<div class="panel-header" style="background-color: {{offer.bgcolor == null ? '#CCC' : offer.bgcolor}} ; color: {{offer.txtcolor == null ? '#000' : offer.txtcolor}}; ">
+				<h3>{{offer.title}}</h3>
+			</div>
+			<div class="panel-body">
+				<span class="author" ng-if="!userOffer" >Created: <p>{{offer.user.email}}</p></span>
+				<p ng-bind-html="offer.body | showAsHTML"></p>
+				<span class="category">{{offer.category_name}} </span>
+				<span class="created">{{offer.created_at | toTimestamp | date : 'dd.MM.yyyy HH:mm:ss'}}</span>
+			</div>
+			<div class="panel-footer">
+				<span class="price" ng-if="!userOffer">{{offer.price + ' ' + offer.name }}</span>
+				<button class="btn btn-primary btnRight" ng-click="showOrderForm(offer.id_offer)" ng-if="!userOffer">Order</button>
+				<button class="btn btn-primary pull-left" ng-click="showChangeOfferForm(offer.id_offer)" ng-if="userOffer">Change offer</button>
+				<button class="btn btn-primary btnRight" ng-click="deleteOffer(offer.id_offer)" ng-if="userOffer">Delete offer</button>
+				<button class="btn btn-primary btnCenter" ng-click="showCreateFormPage(offer.id_offer)" ng-if="userOffer">Manage forms</button>
+				<div class="clear"></div>
+			</div>
+		</div>
+		
+	</div>
+	
+	<div class="clear"></div>
+</div>

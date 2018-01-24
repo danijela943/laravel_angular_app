@@ -1,0 +1,19 @@
+<div class="offers" ng-controller="EmbedController">
+    <div other-directive></div>
+    <div class="alert alert-success" ng-repeat="message in root.success track by $index">{{message}}</div>
+    <div class="alert alert-danger" ng-repeat="message in root.errors track by $index">{{message}}</div>
+    <div class="content">
+        <button class="btn btn-default btnOperation" ng-click="(showOperations==true)? showOperations=false : showOperations=true">Forms of selected offer</button>
+        <div class="forms">
+            <div class="panel" ng-repeat="form in forms | orderBy: '-created_at' track by $index " ng-if="showOperations==true">
+            {{form.title}}
+            <div class="operations pull-right" >
+                <i class="fa fa-eye"></i> <a href="#" ng-click="showForm(form.id_form)">View</a> &nbsp; 
+                <i class="fa fa-pencil"></i> <a href="#" ng-click="editForm(form.id_form)">Edit</a> &nbsp;
+                <i class="fa fa-close"></i> <a href="#" ng-click="deleteForm(form.id_form)">Delete</a>
+            </div>
+            </div>
+        </div> 
+        <div other-directive custom-template="form_create_form"></div>   
+    </div>
+</div>

@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css?family=Alegreya');
+@import url('https://fonts.googleapis.com/css?family=Pacifico');
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+@import url('http://localhost/angular-client/public/css/bootstrap.css');
+#app-root{
+	width:500px;
+	font-family: 'Raleway', sans-serif;
+	margin: 0;
+	padding: 0;
+	background: #FFF !important;
+}
+#app-root a {
+	color: #3c434f;
+}
+#app-root .content{
+	margin-top:20px;
+}
+#app-root #menu{
+	list-style-type: none;
+	background: #3c434f;
+	margin: 0px;
+	padding: 0;
+	width: 500px;
+	min-height: 40px;
+}
+#app-root #menu li{
+	display: inline-block;
+	color: white;
+	border-right: 1px solid #CCC;
+}
+#app-root #menu li:last-child{
+	border: 0px;
+}
+#app-root #menu li:nth-child(1){
+	border: 0px;
+	font-family: 'Pacifico', cursive;
+	font-size: 20px;
+	margin-top:5px;
+}
+#app-root #menu li a{
+	padding: 5px;
+	color: white;
+	cursor: pointer;
+}
+#app-root #menu li i{
+	margin-left: 5px;
+}
+#app-root .left{
+	float: left;
+}
+#app-root .clear{
+	clear:both;
+}
+#app-root input.ng-invalid {
+    border-color: red;
+}
+#app-root .error, .required{
+	color: red;
+}
+#app-root input.ng-pristine {
+    border-color: #CCC;
+}
+#app-root .position-top{
+	padding-top: 5px;
+}
+
+#app-root .offers{
+	width: 100%;
+	max-height: 500px;
+	overflow: auto;
+	font-family: 'Alegreya', serif;
+}
+#app-root .offer{
+	width: 47%;
+	margin: 1%;
+	word-wrap: break-word;
+	border: 3px double #CCC;
+} 
+#app-root .offer .author, .offer .created{
+	width: 100%;
+	display: block;
+}
+#app-root .offer .author p{
+	font-weight: bold;
+}
+#app-root .offer .created{
+	font-style: italic;
+}
+#app-root .offer .panel-header{
+	padding: 5px;	
+	border: 3px double #CCC;
+	border-radius: 5%;
+	text-align: center;
+}
+#app-root .offer h3{
+	font-size: 17px;
+}
+#app-root .offer .panel-body{
+	font-size: 12px;
+}
+#app-root .offer .panel-footer{
+	padding: 10px;
+}
+#app-root .offer .btnRight{
+	float: right;
+}
+#app-root .panel-body h1 {
+	font-family: 'Pacifico', cursive;
+	text-align: center;
+	color: #3c434f;
+}
+#app-root .panel-body  h2{
+	font-size: 20px;
+	text-align: center;
+	opacity: 0.7;
+}
+#app-root #login{
+	background: linear-gradient(to bottom, #9ec6e5 32%,#7db9e8 43%,#7db9e8 43%,#2989d8 100%);
+	border: 3px solid #7db9e8;
+}
+#app-root .panel-body .position-center{
+	margin: 0px auto;
+}
+#app-root .panel-body .links{
+	text-align: center;
+}
+#app-root .panel-body .links a{
+	color: white;
+}
+#app-root .form{
+	background: #CCC;
+	padding-bottom: 10px;
+}
+#app-root .btnCenter{
+	margin-top: 5px;
+}
+#app-root .forms .panel{
+	padding-left: 10px;
+}
+#app-root .btnOperation{
+	margin-bottom: 10px;
+}
+#app-root .form_offer{
+	margin-left: 10px;
+}
+#app-root .task {
+	width: 40%;
+	margin: 1%;
+	word-wrap: break-word;
+	float: left;
+	min-height: 300px;
+	margin-bottom: 0px;
+}
+#app-root .task .alert {
+	margin-bottom: 0px ;
+}
+#app-root .task h3 {
+	font-size: 17px;
+	text-decoration: underline;
+}
+#app-root .task ul{
+	list-style-type: circle;
+}
+#app-root .paddingEl{
+	padding: 10px;
+}
